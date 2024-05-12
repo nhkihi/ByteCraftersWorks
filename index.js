@@ -1,22 +1,13 @@
-function shuffle(array) {
-  let currentIndex = array.length,
-    randomIndex;
-
-  // While there are elements remaining
-  while (currentIndex !== 0) {
-    // Pick a remaining element
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    // Swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ];
+function canPartition(nums) {
+  const sum = nums.reduce((acc, val) => acc + val, 0);
+  if (sum % 2 !== 0) return false;
+  const target = sum / 2;
+  const dp = new Array(target + 1).fill(false);
+  dp[0] = true;
+  for (const num of nums) {
+    for (let i = target; i >= num; i--) {
+      dp[i] = dp[i] || dp[i - num];
+    }
   }
-
-  return array;
+  return dp[target];
 }
-
-const shuffledDeck = shuffle([1, 2, 3, 4, 5]);
-console.log(shuffledDeck);
