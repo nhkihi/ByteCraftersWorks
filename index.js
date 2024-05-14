@@ -1,3 +1,3 @@
-function sumArray(arr) {
-  return arr.reduce((acc, curr) => acc + curr, 0);
+function countConsonants(str) {
+  return str.match(/[bcdfghjklmnpqrstvwxyz]/gi).length;
 }
